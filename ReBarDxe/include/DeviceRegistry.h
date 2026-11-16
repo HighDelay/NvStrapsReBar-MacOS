@@ -4,6 +4,9 @@
 // Some test to check if compiling UEFI code
 #if defined(UEFI_SOURCE) || defined(EFIAPI)
 # include <Uefi.h>
+#elif defined(__APPLE__)
+# include <stdint.h>
+    typedef uint16_t UINT16;
 #else
 # if defined(__cplusplus) && !defined(NVSTRAPS_DXE_DRIVER)
 import NvStraps.WinAPI;

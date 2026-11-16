@@ -1,0 +1,18 @@
+name: NvStrapsReBar macOS v0.3
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  macos:
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test without firmware writes
+        run: sh ReBarState/macos/build.sh --test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NvStrapsReBar-macOS-v0.3
+          path: build/macos/NvStrapsReBar-macOS-v0.3.zip

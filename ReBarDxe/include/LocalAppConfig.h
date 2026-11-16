@@ -25,7 +25,7 @@
     };
 # else
 #  include <errno.h>
-    typedef errno_t ERROR_CODE;
+    typedef int ERROR_CODE;
     enum
     {
 	ERROR_CODE_SUCCESS = (ERROR_CODE)0

@@ -2,6 +2,26 @@ cmake_minimum_required(VERSION 3.28)
 
 project("NvStrapsReBar" LANGUAGES C CXX)
 
+# The macOS port targets the v0.3 firmware protocol and does not use Win32
+# APIs or C++23 modules. Keep it independent of the Windows module toolchain.
+if(APPLE)
+    if(NOT CMAKE_OSX_ARCHITECTURES)
+        set(CMAKE_OSX_ARCHITECTURES x86_64)
+    endif()
+    add_library(NvStrapsConfigMac STATIC macos/Config.cpp ../ReBarDxe/DeviceRegistry.c)
+    target_compile_features(NvStrapsConfigMac PUBLIC cxx_std_17)
+    target_include_directories(NvStrapsConfigMac PUBLIC macos ../ReBarDxe/include)
+    add_executable(NvStrapsReBar macos/main.cpp macos/MacPlatform.cpp)
+    target_link_libraries(NvStrapsReBar PRIVATE NvStrapsConfigMac "-framework IOKit" "-framework CoreFoundation")
+    include(CTest)
+    if(BUILD_TESTING)
+        add_executable(NvStrapsReBarTests macos/tests.cpp)
+        target_link_libraries(NvStrapsReBarTests PRIVATE NvStrapsConfigMac)
+        add_test(NAME NvStrapsReBarMacConfig COMMAND NvStrapsReBarTests)
+    endif()
+    return()
+endif()
+
 include(cmake/LocalModulePath.cmake)
 include(CxxStdModule)
 

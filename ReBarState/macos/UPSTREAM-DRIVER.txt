@@ -1,0 +1,18 @@
+Bundled motherboard UEFI DXE driver
+
+File: NvStrapsReBar.ffs
+Upstream repository: https://github.com/terminatorul/NvStrapsReBar
+Release: https://github.com/terminatorul/NvStrapsReBar/releases/tag/v0.3
+Asset: https://github.com/terminatorul/NvStrapsReBar/releases/download/v0.3/NvStrapsReBar.ffs
+GitHub release asset ID: 155634714
+Size: 13628 bytes
+SHA-256: bc05d92b214d663a3b8d637a9f72ca694105151e467e24d18e2b25fbf6ecd3c3
+Upstream v0.3 source commit: 477ec9bdffd67b8a3f5f95ba66bf7168a2369f9f
+
+This is the original, unmodified binary downloaded from upstream v0.3.
+It has not been rebuilt by the macOS port. The accompanying MIT license is
+the upstream project's license. See the upstream release and project README
+for motherboard firmware installation instructions.
+
+The macOS utility configures this driver through its EFI variable. It does
+not install the driver or flash the motherboard firmware.
